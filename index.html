@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="./style.css" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=BioRhyme+Expanded:400,700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Suez+One&display=swap" rel="stylesheet">
+
+   <title>Joquempô</title>
+</head>
+<body>  
+
+   <div id="joquempo">
+         
+      <div id="playing-field">
+
+         <div id="scoreboard">
+
+            <div class="player">
+               <div class="name"> Jogador </div>
+               <div class="score"> 00 </div>
+            </div>
+
+            <div class="round"> Rodada 1 </div>
+
+            <div class="cpu">
+               <div class="name"> CPU </div>
+               <div class="score"> 00 </div>
+            </div>
+         </div>
+
+         <div id="gameboard">
+            <div class="choice player"><img src="./img/scissor.png"></div>
+            <div class="vs"><img src="./img/vs.png"></div>
+            <div class="choice cpu"><img src="./img/paper.png"></div>
+         </div>
+
+      </div>   
+      
+   </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="./joquempo.js"></script>
+
+</body>
+</html>
