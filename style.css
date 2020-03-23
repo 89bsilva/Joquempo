@@ -7,8 +7,8 @@
          width: 100%;
          height: 100%;
          background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
-         font-family: 'BioRhyme Expanded', serif;
-         font-weight: 700;
+         font-family: 'Baloo 2', cursive;
+         font-weight: 400;
       }
 
       #joquempo 
@@ -22,7 +22,65 @@
          border-radius: 10px;
          box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.10);
       }
+
+      #menu
+      {
+         display: flex;
+         flex-direction: column;
+      }
       
+      #menu .form
+      {
+         display: flex;
+      }
+
+      #menu .form input
+      {
+         height: 30px;
+         margin-top: 10px;
+         border: none;
+         border-radius: 10px;
+         padding: 10px;
+         background-color: #fff;
+         box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.10);
+         color: #414141;
+         font-family: 'Baloo 2', cursive;
+         font-size: 16px;
+      }
+
+      #menu .form .player-name
+      {
+         margin: 20px 10px 20px 20px;
+         width: 480px;
+      }
+
+      #menu .form .rounds
+      {
+         margin: 20px 20px 20px 10px;
+         width: 60px;
+      }
+      
+      #menu .start-game
+      {
+         height: 50px;
+         margin: 10px 20px 20px 20px;
+         border: none;
+         border-radius: 10px;
+         background-color: #414141;
+         color: #fff;
+         box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.10);
+         font-family: 'Baloo 2', cursive;
+         font-size: 16px;
+      }
+
+      #menu .start-game:hover
+      {
+         height: 50px;
+         background-color: #005a35;
+         box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.10);
+         cursor: pointer;
+      }
+
       #scoreboard
       {
          position: relative;
@@ -47,7 +105,7 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         font-family: 'Suez One', serif;
+         font-weight: 600;
          font-size: 32px;
          height: 60px;
          width: 60px;
@@ -57,13 +115,35 @@
          box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.05);
       }
 
+      #scoreboard .score.win
+      {
+         background-color: green;
+         color: #fff;
+      }
+
+      #scoreboard .score.lose
+      {
+         background-color: red;
+         color: #fff;
+      }
+
       #scoreboard .name
       {
          display: flex;
          align-items: center;
          margin-bottom: 10px;
-         font-size: 13px;
+         font-size: 16px;
          height: 40px;
+      }
+
+      #scoreboard .name.lose
+      {
+         color: red;
+      }
+
+      #scoreboard .name.win
+      {
+         color: green;
       }
 
       #scoreboard  .round {
@@ -71,23 +151,23 @@
          align-items: center;
          justify-content: space-around;
          text-align: center;
-         font-family: 'Suez One', serif;
-         font-size: 24px;
+         font-weight: 600;
+         font-size: 42px;
          color: #414141;
       }
 
-      #gameboard
+      #gameboard img
+      {
+         height: 100%;
+      }
+
+      #gameboard .content
       {
          display: flex;
          align-items: center;
          justify-content: space-around;
-         margin: 20px;
          height: 260px;
-      }
-
-      #gameboard div img
-      {
-         height: 100%;
+         margin: 20px;
       }
 
       #gameboard .choice
@@ -99,8 +179,76 @@
          width: 132px;
       }
 
-      #gameboard .vs
+      #gameboard .choice-board > span
+      {
+         font-size: 20px;
+         font-weight: 600;
+      }
+
+      #gameboard .choice-board .choice
+      {
+         display: flex;
+         align-items: center;
+         flex-direction: column;
+         justify-content: space-around;
+         color: #414141;
+      }
+
+      #gameboard .choice-board .choice img
+      {
+         height: 80%;
+      }
+
+      #gameboard .choice-board .choice:hover > img
+      {
+         cursor: pointer;
+         height: 90%;
+      }
+
+      #gameboard .choice-board .choice:hover > span
+      {
+         margin-bottom: 5px;
+         font-weight: 600;
+      }
+
+      #gameboard .loading-fight
+      {
+         margin: 20px 0;
+      }
+
+      #gameboard .loading-fight img
+      {
+         width: 100%;
+      }
+
+      #gameboard .fight .vs
       {
          height: 150px;
          width: 150px;
+      }
+
+      #gameboard .result
+      {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 380px;
+         margin: 0;
+         padding: 10px;
+         color: #fff;
+         border-radius: 10px;
+         box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.10);
+         font-size: 18px;
+         font-weight: 600;
+      }
+
+      #gameboard .result.win
+      {
+         background-color:#3aca35f1;
+      }
+
+      #gameboard .result.lose
+      {
+         background-color:#ff0000f2;
       }
