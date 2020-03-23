@@ -11,63 +11,147 @@
 <body>  
 
    <div id="joquempo">
-      <button @click="stage--"> << </button>
-      Passar as telas
-      <button @click="stage++"> >> </button>
-      {{ stage }}
-
-      <div id="menu" class="content" v-if="stage === 0">
+      <div id="menu" class="content" v-if="stage === 'menu'">
          <div class="form">
-            <input type="text" class="player-name" placeholder ="Nome do jogador">
-            <input type="text" class="rounds" placeholder ="Rodadas" maxlength="2">
+            <input 
+               type="text" 
+               class="player-name" 
+               placeholder ="Nome do jogador" 
+               v-model="player.name"
+               @blur="handlePlayerName"  
+            >
+            <input 
+               type="text" 
+               class="rounds"
+               placeholder ="Rodadas"
+               v-model="round.final"
+               maxlength="2"
+               @blur="handleFinalRound"   
+            >
          </div>
-         <button class="start-game">Iniciar Jogo</button>
+
+         <button 
+            class="start-game" 
+            :disabled="!allValidData" 
+            @click="toChoiceBoard"
+         >
+            Iniciar Jogo
+         </button>
       </div>
 
-      <div id="playing-field" v-if="running || stage > 0">
+      <div id="playing-field" v-else>
 
          <div id="scoreboard">
             <div class="player">
-               <div class="name" :class="playerClass"> {{ playerName }} </div>
-               <div class="score" :class="playerClass"> {{ playerScore }} </div>
+               <div 
+                  class="name" 
+                  :class="{
+                     winning: winning === 'player',
+                     losing: winning === 'cpu'
+                  }"
+               >  
+                  {{ player.name }}
+               </div>
+               <div 
+                  class="score"
+                  :class="{
+                     winning: winning === 'player',
+                     losing: winning === 'cpu'
+                  }"
+               >
+                  {{ player.score }}
+               </div>
             </div>
 
-            <div class="round"> Rodada {{ round }} de {{ finalRound }} </div>
+            <!-- <div class="round"> Rodada {{ round.current }} de {{ round.final }} </div> -->
+            <div 
+               class="result"
+               :class="{
+                  winning: round.winner === 'player' && end,
+                  losing: round.winner === 'cpu' && end,
+                  draw: round.winner === 'nobody' && end
+               }"
+            >
+               <template v-if="stage === 'result'">
+                  <template v-if="round.winner === 'player'">
+                     <span v-if="end">Parabéns!!! Você venceu o jogo.</span>
+                     <span v-else>Vitória!</span>
+                  </template>
+   
+                  <template v-if="round.winner === 'cpu'" > 
+                     <span v-if="end">Você perdeu o jogo!!!.</span>
+                     <span v-else>Derrota!</span>
+                  </template>
+   
+                  <template v-if="round.winner === 'nobody'" > 
+                     <span v-if="end">O jogo terminou empatado!!!</span>
+                     <span v-else>Empate! </span>
+                  </template>
+   
+                  <button v-if="end" @click="newGame">Novo Jogo</button>
+                  <button v-else @click="toChoiceBoard">Continuar</button>
+               </template>
+            </div>
 
             <div class="cpu">
-               <div class="name" :class="cpuClass"> CPU </div>
-               <div class="score" :class="cpuClass"> {{ cpuScore }} </div>
+               <div 
+                  class="name" 
+                  :class="{
+                     winning: winning === 'cpu',
+                     losing: winning === 'player'
+                  }"
+               > 
+                  CPU
+               </div>
+               <div 
+                  class="score" 
+                  :class="{
+                     winning: winning === 'cpu',
+                     losing: winning === 'player'
+                  }"
+               > 
+                  {{ cpu.score }}
+               </div>
             </div>
          </div>
 
          <div id="gameboard">
-            <div class="content choice-board" v-if="stage === 1">
+            <div class="content choice-board" v-if="stage === 'choiceBoard'">
                <span>Escolha: </span>
-               <div class="choice">
+               <div class="choice" @click="startFight(0)">
                   <span>Pedra</span> 
                   <img src="./img/rock.png">
                </div>
-               <div class="choice">
+               <div class="choice" @click="startFight(1)">
                   <span>Papel</span> 
                   <img src="./img/paper.png">
                </div>
-               <div class="choice">
+               <div class="choice" @click="startFight(2)">
                   <span>Tesoura</span> 
                   <img src="./img/scissor.png">
                </div>
             </div>
 
-            <div class="content loading-fight" v-if="stage === 2"> <img src="./img/start.png"> </div>
+            <div class="content loading-fight" v-if="stage === 'loadingFight'"> <img src="./img/start.png"> </div>
             
-            <div class="content fight" v-if="stage === 3 || stage === 4">
-               <div class="choice player"><img src="./img/scissor.png"></div>
+            <div class="content fight" v-if="stage === 'fight' || stage === 'result'">
+               <div 
+                  class="choice player"
+                  :class="{
+                     winning: round.winner === 'player',
+                  }"
+               >
+                  <img :src="`./img/${player.optionChosen}.png`">
+               </div>
                <div class="vs"><img src="./img/vs.png"></div>
-               <div class="choice cpu"><img src="./img/paper.png"></div>
-            </div>
-               
-            <div class="content result" :class="resultClass" v-if="stage === 4">
-               <div class="choice"><img src="./img/scissor.png"></div>
-               A tesoura venceu o papel
+               <div 
+                  class="choice cpu"
+                  :class="{
+                     winning: round.winner === 'cpu',
+                  }"
+               >
+                  <img :src="`./img/${cpu.optionChosen}.png`">
+               </div>
             </div>
          </div>
 

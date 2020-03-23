@@ -48,6 +48,11 @@
          font-size: 16px;
       }
 
+      #menu .form input:focus
+      {
+         outline: 0;
+      }
+
       #menu .form .player-name
       {
          margin: 20px 10px 20px 20px;
@@ -63,7 +68,7 @@
       #menu .start-game
       {
          height: 50px;
-         margin: 10px 20px 20px 20px;
+         margin: 0px 20px 20px 20px;
          border: none;
          border-radius: 10px;
          background-color: #414141;
@@ -79,6 +84,14 @@
          background-color: #005a35;
          box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.10);
          cursor: pointer;
+      }
+
+      #menu .start-game:disabled
+      {
+         height: 50px;
+         background-color: #c1c1c1;
+         color: #fff;
+         cursor: not-allowed;
       }
 
       #scoreboard
@@ -115,13 +128,13 @@
          box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.05);
       }
 
-      #scoreboard .score.win
+      #scoreboard .score.winning
       {
          background-color: green;
          color: #fff;
       }
 
-      #scoreboard .score.lose
+      #scoreboard .score.losing
       {
          background-color: red;
          color: #fff;
@@ -136,24 +149,80 @@
          height: 40px;
       }
 
-      #scoreboard .name.lose
+      #scoreboard .name.losing, #scoreboard .result.losing
       {
          color: red;
       }
 
-      #scoreboard .name.win
+      #scoreboard .name.winning, #scoreboard .result.winning
       {
          color: green;
+      }
+      
+      #scoreboard .result.draw
+      {
+         color:#414141f2;
       }
 
       #scoreboard  .round {
          display: flex;
+         width: 80px;
          align-items: center;
          justify-content: space-around;
          text-align: center;
          font-weight: 600;
-         font-size: 42px;
+         font-size: 24px;
          color: #414141;
+      }
+
+      #scoreboard  .result {
+         display: flex;
+         width: 180px;
+         align-items: center;
+         flex-direction: column;
+         justify-content: center;
+         text-align: center;
+         font-weight: 600;
+         font-size: 16px;
+         color: #414141;
+      } 
+      
+      #scoreboard .result button
+      {
+         background-color: transparent;
+         padding: 10px;
+         text-transform: uppercase;
+         border: thin solid;
+         border-radius: 10px;
+         color: inherit;
+         font-weight: 600;
+         outline: 0;
+      }
+      #scoreboard .result button:hover
+      {
+         cursor: pointer;
+         background-color: #fff;
+         color: #fff;
+         background-color: #6b6b6b;
+         border-color: #6b6b6b;
+      }
+
+      #scoreboard .result.losing button:hover
+      {
+         background-color: red;
+         border-color: red;
+      }
+
+      #scoreboard .result.winning button:hover
+      {
+         background-color: green;
+         border-color: green;
+      }
+
+      #scoreboard .result.draw button:hover
+      {
+         background-color: #414141f2;
+         border-color: #414141f2;
       }
 
       #gameboard img
@@ -199,9 +268,13 @@
          height: 80%;
       }
 
-      #gameboard .choice-board .choice:hover > img
+      #gameboard .choice-board .choice:hover
       {
          cursor: pointer;
+      }
+
+      #gameboard .choice-board .choice:hover > img
+      {
          height: 90%;
       }
 
@@ -227,28 +300,77 @@
          width: 150px;
       }
 
+      #gameboard .fight .winning
+      {
+         border: 2px solid green;
+         border-radius: 10px;
+      }
+
       #gameboard .result
       {
          position: absolute;
          top: 50%;
          left: 50%;
+         display: flex;
+         flex-direction: column;
          transform: translate(-50%, -50%);
-         width: 380px;
+         width: 200px;
+         height: 100px;
+         text-align: center;
          margin: 0;
          padding: 10px;
          color: #fff;
          border-radius: 10px;
          box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.10);
-         font-size: 18px;
+         font-size: 16px;
          font-weight: 600;
       }
 
-      #gameboard .result.win
+      #gameboard .result button
+      {
+         background-color: transparent;
+         padding: 10px;
+         text-transform: uppercase;
+         border: thin solid;
+         border-radius: 10px;
+         color: #fff;
+         font-weight: 600;
+         outline: 0;
+      }
+
+      #gameboard .result button:hover
+      {
+         cursor: pointer;
+         background-color: #fff;
+      }
+      
+
+      #gameboard .result.winning
       {
          background-color:#3aca35f1;
       }
 
-      #gameboard .result.lose
+      #gameboard .result.winning button:hover
+      {
+         color: #3aca35f1;
+      }
+
+      #gameboard .result.losing
       {
          background-color:#ff0000f2;
+      }
+
+      #gameboard .result.losing button:hover
+      {
+         color: #ff0000f2;
+      }
+
+      #gameboard .result.draw
+      {
+         background-color:#414141f2;
+      }
+
+      #gameboard .result.draw button:hover
+      {
+         color: #414141f2;
       }
