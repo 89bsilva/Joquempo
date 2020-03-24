@@ -39,7 +39,7 @@ var app = new Vue({
       end: false
    },
    watch: {
-      // Para impedir que o jogo não termine empatado
+      // Para impedir que o jogo termine empatado
       end(newState) {
 
          if(newState === false) {
@@ -142,7 +142,8 @@ var app = new Vue({
       }
    },
    computed: {
-      // Habilita o botão iniciar jogo se há valores válidos em finalRound e playerName. Desabilita caso contrário
+      // Retorna TRUE se há valores válidos em finalRound e playerName e FALSE caso contrário.
+      // Usado para Habilitar/Desabilitar o botão iniciar jogo
       allValidData() {
          return this.round.final && this.player.name
       },
